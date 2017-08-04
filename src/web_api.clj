@@ -4,7 +4,8 @@
   (:require [clj-json.core :as json]
             [ring.adapter.jetty :as jetty]
             [environ.core :refer [env]]
-            [compojure.handler :refer [site]])
+            [compojure.handler :refer [site]]
+            [services])
   (:import (org.codehaus.jackson JsonParseException))
   (:import (clojure.contrib.condition Condition)))
 
@@ -25,8 +26,8 @@
 (defroutes handler
            (GET "/" []
              (splash))
-           (PUT "/" [name]
-             (json-response {"Hello" name})))
+           (PUT "/new-account" [name]
+             (json-response (services/create-account name))))
 
 (defn wrap-error-handling [handler]
   (fn [req]
