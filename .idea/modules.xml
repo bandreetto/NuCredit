@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/NuCredit.iml" filepath="$PROJECT_DIR$/NuCredit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nucredit.iml" filepath="$PROJECT_DIR$/nucredit.iml" />
     </modules>
   </component>
 </project>

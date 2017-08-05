@@ -1,4 +1,4 @@
-(ns ledger)
+(ns nucredit.ledger)
 
 (def ledger (ref '()))
 (def accounts (ref {}))
@@ -6,8 +6,8 @@
 (defn new-account [name]
   (let  [new-id (inc (count @accounts))]
     (dosync
-      (alter accounts conj [new-id {:name      name
-                                      :balance 0}])
+      (alter accounts conj [new-id {:name    name
+                                    :balance 0}])
       new-id)))
 
 (defn consolidate [& {:keys [party counter-party amount date]}]

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Leiningen: org.eclipse.jgit:3.6.2.201501210735-r">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/jgit/org.eclipse.jgit/3.6.2.201501210735-r/org.eclipse.jgit-3.6.2.201501210735-r.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

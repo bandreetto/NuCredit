@@ -1,11 +1,11 @@
-(ns web-api
+(ns nucredit.web
   (:use compojure.core)
   (:use ring.middleware.json-params)
   (:require [clj-json.core :as json]
             [ring.adapter.jetty :as jetty]
             [environ.core :refer [env]]
             [compojure.handler :refer [site]]
-            [services])
+            [nucredit.services :as services])
   (:import (org.codehaus.jackson JsonParseException))
   (:import (clojure.contrib.condition Condition)))
 
@@ -35,7 +35,7 @@
              (json-response (services/operate (read-string party)
                                               counter-party
                                               (read-string amount)
-                                              (read-string offset)))))
+                                              offset))))
 
 (defn wrap-error-handling [handler]
   (fn [req]

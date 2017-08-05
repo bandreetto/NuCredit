@@ -1,6 +1,6 @@
-(ns tests.service-tests
+(ns nucredit.tests.service-tests
   (:require [clojure.test :refer :all]
-            [services :refer :all]))
+            [nucredit.services :refer :all]))
 
 (deftest new-account-test
   (let [account (create-account "test")]
