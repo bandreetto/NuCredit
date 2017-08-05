@@ -1,1 +1,1 @@
-web: java $JVM_OPTS -cp target/NuCredit.jar clojure.main -m web-api
+web: java $JVM_OPTS -cp target/NuCredit.jar clojure.main -m NuCredit.web
