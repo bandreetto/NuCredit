@@ -10,4 +10,5 @@
    [environ "1.1.0"]
    [clj-time "0.14.0"]]
   :dev-dependencies
-  [[lein-run "1.0.0-SNAPSHOT"]])
+  [[lein-run "1.0.0-SNAPSHOT"]]
+  :profiles {:production {:env {:production true}}})
