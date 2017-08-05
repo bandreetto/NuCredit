@@ -7,6 +7,7 @@
    [ring-json-params "0.1.3"]
    [compojure "1.6.0"]
    [clj-json "0.5.3"]
-   [environ "1.1.0"]]
+   [environ "1.1.0"]
+   [clj-time "0.14.0"]]
   :dev-dependencies
   [[lein-run "1.0.0-SNAPSHOT"]])

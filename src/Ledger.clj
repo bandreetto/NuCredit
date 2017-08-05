@@ -1,18 +1,22 @@
 (ns ledger)
 
-(def ^{:private true} *ledger* (ref '()))
-(def ^{:private true} *accounts* (ref {}))
+(def ledger (ref '()))
+(def accounts (ref {}))
 
 (defn new-account [name]
-  (let  [new-id (inc (count @*accounts*))]
+  (let  [new-id (inc (count @accounts))]
     (dosync
-      (alter *accounts* conj [new-id {:name name
-                                      :balance 0}]))))
+      (alter accounts conj [new-id {:name      name
+                                      :balance 0}])
+      new-id)))
 
 (defn consolidate [& {:keys [party counter-party amount date]}]
   (dosync
-    (alter *ledger* conj {:party party
-                          :counter-party counter-party
-                          :amount amount
-                          :date date})
-    (alter *accounts* [party :amount] + amount)))
+    (alter ledger conj {:party           party
+                        :counter-party   counter-party
+                        :amount          amount
+                        :date            date})
+    (alter accounts update-in [party :balance] + amount)))
+
+(defn get-account [accountId]
+  (@accounts accountId))

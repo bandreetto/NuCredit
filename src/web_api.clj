@@ -26,8 +26,16 @@
 (defroutes handler
            (GET "/" []
              (splash))
-           (PUT "/new-account" [name]
-             (json-response (services/create-account name))))
+           (PUT "/create-account" [name]
+             (json-response (services/create-account name)))
+           (PUT "/operate" [party
+                            counter-party
+                            amount
+                            offset]
+             (json-response (services/operate (read-string party)
+                                              counter-party
+                                              (read-string amount)
+                                              (read-string offset)))))
 
 (defn wrap-error-handling [handler]
   (fn [req]
