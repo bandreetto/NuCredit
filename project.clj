@@ -8,7 +8,7 @@
    [ring/ring-servlet "1.6.2"]
    [lein-heroku "0.5.3"]
    [compojure "1.6.0"]
-   [clj-json "0.5.3"]
+   [cheshire "5.5.0"]
    [environ "1.1.0"]
    [clj-time "0.14.0"]]
   :dev-dependencies

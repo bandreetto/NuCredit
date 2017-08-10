@@ -1,7 +1,7 @@
 (ns nucredit.web
   (:use compojure.core)
   (:use ring.middleware.json-params)
-  (:require [clj-json.core :as json]
+  (:require [cheshire.core :as json]
             [ring.adapter.jetty :as jetty]
             [environ.core :refer [env]]
             [compojure.handler :refer [site]]
