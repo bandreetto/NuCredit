@@ -1,5 +1,5 @@
-(ns services
-  (:require [ledger]
+(ns nucredit.services
+  (:require [nucredit.ledger :as ledger]
             [clj-time.core :as t]))
 
 (defn create-account [name]
@@ -14,6 +14,6 @@
                         :amount (BigDecimal. amount)
                         :date (t/plus
                                 (t/today)
-                                (t/days (or offset
-                                            0))))
+                                (t/days (read-string (or offset
+                                                         "0")))))
     {:error (str "No accounts with id: " party " found")}))
