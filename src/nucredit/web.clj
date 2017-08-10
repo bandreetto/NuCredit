@@ -34,7 +34,7 @@
                             offset]
              (json-response (services/operate (read-string party)
                                               counter-party
-                                              (read-string amount)
+                                              (BigInteger. amount)
                                               offset))))
 
 (defn wrap-error-handling [handler]

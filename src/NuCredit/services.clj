@@ -11,7 +11,7 @@
   (if-let [account (ledger/get-account party)]
     (ledger/consolidate :party party
                         :counter-party counter-party
-                        :amount (BigDecimal. amount)
+                        :amount amount
                         :date (t/plus
                                 (t/today)
                                 (t/days (read-string (or offset
