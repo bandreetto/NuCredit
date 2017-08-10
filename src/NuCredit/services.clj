@@ -2,6 +2,11 @@
   (:require [nucredit.ledger :as ledger]
             [clj-time.core :as t]))
 
+(defn get-balance [accountId]
+  (if-let [account (ledger/get-account accountId)]
+    account
+    {:error (str "No accounts with id: " accountId " found")}))
+
 (defn create-account [name]
   (let [account-id (ledger/new-account name)]
     {:account-number account-id

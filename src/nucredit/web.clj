@@ -26,6 +26,8 @@
 (defroutes handler
            (GET "/" []
              (splash))
+           (GET "/get-balance" [account-number]
+             (json-response (services/get-balance (read-string account-number))))
            (PUT "/create-account" [name]
              (json-response (services/create-account name)))
            (PUT "/operate" [party
@@ -34,7 +36,7 @@
                             offset]
              (json-response (services/operate (read-string party)
                                               counter-party
-                                              (BigInteger. amount)
+                                              (BigDecimal. amount)
                                               offset))))
 
 (defn wrap-error-handling [handler]
