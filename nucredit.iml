@@ -15,13 +15,16 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Clojure-1.8.0" level="project" />
-    <orderEntry type="library" name="Leiningen: clj-json:0.5.3" level="project" />
+    <orderEntry type="library" name="Leiningen: cheshire:5.5.0" level="project" />
+    <orderEntry type="library" name="Leiningen: clj-json:0.3.1" level="project" />
     <orderEntry type="library" name="Leiningen: clj-time:0.14.0" level="project" />
     <orderEntry type="library" name="Leiningen: clojure-complete:0.2.4" level="project" />
     <orderEntry type="library" name="Leiningen: clout:2.1.2" level="project" />
     <orderEntry type="library" name="Leiningen: com.fasterxml.jackson.core/jackson-annotations:2.2.0" level="project" />
     <orderEntry type="library" name="Leiningen: com.fasterxml.jackson.core/jackson-core:2.2.0" level="project" />
     <orderEntry type="library" name="Leiningen: com.fasterxml.jackson.core/jackson-databind:2.2.0" level="project" />
+    <orderEntry type="library" name="Leiningen: com.fasterxml.jackson.dataformat/jackson-dataformat-cbor:2.5.3" level="project" />
+    <orderEntry type="library" name="Leiningen: com.fasterxml.jackson.dataformat/jackson-dataformat-smile:2.5.3" level="project" />
     <orderEntry type="library" name="Leiningen: com.googlecode.javaewah/JavaEWAH:0.7.9" level="project" />
     <orderEntry type="library" name="Leiningen: com.heroku.sdk/heroku-deploy:0.5.3" level="project" />
     <orderEntry type="library" name="Leiningen: com.jcraft/jsch:0.1.50" level="project" />
@@ -46,7 +49,7 @@
     <orderEntry type="library" name="Leiningen: org.clojure/clojure:1.8.0" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/tools.macro:0.1.5" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/tools.nrepl:0.2.12" level="project" />
-    <orderEntry type="library" name="Leiningen: org.codehaus.jackson/jackson-core-asl:1.9.9" level="project" />
+    <orderEntry type="library" name="Leiningen: org.codehaus.jackson/jackson-core-asl:1.5.0" level="project" />
     <orderEntry type="library" name="Leiningen: org.eclipse.jetty/jetty-http:9.2.21.v20170120" level="project" />
     <orderEntry type="library" name="Leiningen: org.eclipse.jetty/jetty-io:9.2.21.v20170120" level="project" />
     <orderEntry type="library" name="Leiningen: org.eclipse.jetty/jetty-server:9.2.21.v20170120" level="project" />
@@ -58,5 +61,6 @@
     <orderEntry type="library" name="Leiningen: ring/ring-core:1.6.2" level="project" />
     <orderEntry type="library" name="Leiningen: ring/ring-jetty-adapter:1.6.2" level="project" />
     <orderEntry type="library" name="Leiningen: ring/ring-servlet:1.6.2" level="project" />
+    <orderEntry type="library" name="Leiningen: tigris:0.1.1" level="project" />
   </component>
 </module>

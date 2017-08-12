@@ -1,7 +1,7 @@
 (ns nucredit.web
   (:use compojure.core)
   (:use ring.middleware.json-params)
-  (:require [clj-json.core :as json]
+  (:require [cheshire.core :as json]
             [ring.adapter.jetty :as jetty]
             [environ.core :refer [env]]
             [compojure.handler :refer [site]]
@@ -28,6 +28,8 @@
              (splash))
            (GET "/get-balance" [account-number]
              (json-response (services/get-balance (read-string account-number))))
+           (GET "/get-statement" [account-number]
+             (json-response (services/get-statement (read-string account-number))))
            (PUT "/create-account" [name]
              (json-response (services/create-account name)))
            (PUT "/operate" [party
