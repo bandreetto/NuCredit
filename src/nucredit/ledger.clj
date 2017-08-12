@@ -18,5 +18,8 @@
                         :date            date})
     (alter accounts update-in [party :balance] + amount)))
 
-(defn get-account [accountId]
-  (@accounts accountId))
+(defn get-account [account-id]
+  (@accounts account-id))
+
+(defn get-statements [account-id]
+  (filter #(= (:party %) account-id) @ledger))
