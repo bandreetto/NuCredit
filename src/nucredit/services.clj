@@ -53,12 +53,12 @@
 
 (defn operate [party counter-party amount offset]
   (if-let [account (ledger/get-account party)]
-    (ledger/consolidate :party party
+    ((ledger/consolidate :party party
                         :counter-party counter-party
                         :amount amount
                         :date (t/plus
                                 (t/today)
                                 (t/days (read-string (or offset
-                                                         "0")))))
+                                                         "0"))))) party)
     {:error (str "No accounts with id: " party " found")}))
 
