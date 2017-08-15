@@ -5,6 +5,27 @@
             [clj-time.coerce :as c]
             [clojure.set :as set]))
 
+
+; Get Debt Periods
+
+(defn format-end-date [debt]
+  (if-let [end-date (debt :end)]
+    (update debt :end (comp
+                        #(f/unparse (f/formatters :year-month-day) %)
+                        #(c/to-date-time %)))
+    debt))
+
+(defn format-start-date [debt]
+  (update debt :start (comp
+                        #(f/unparse (f/formatters :year-month-day) %)
+                        #(c/to-date-time %))))
+
+(defn format-debt-dates [debts-vector]
+  (map (comp format-end-date format-start-date) debts-vector))
+
+(defn get-debt-periods [account-id]
+  (format-debt-dates (ledger/get-debts account-id)))
+
 ; Get Statement
 
 (defn remove-date [operation]
@@ -54,9 +75,9 @@
 (defn operate [party counter-party amount offset]
   (if-let [account (ledger/get-account party)]
     ((ledger/consolidate :party party
-                        :counter-party counter-party
-                        :amount amount
-                        :date (t/plus
+                         :counter-party counter-party
+                         :amount amount
+                         :date (t/plus
                                 (t/today)
                                 (t/days (read-string (or offset
                                                          "0"))))) party)
