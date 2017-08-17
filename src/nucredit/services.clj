@@ -79,7 +79,6 @@
                          :amount amount
                          :date (t/plus
                                 (t/today)
-                                (t/days (read-string (or offset
-                                                         "0"))))) party)
+                                (t/days (or offset 0)))) party)
     {:error (str "No accounts with id: " party " found")}))
 

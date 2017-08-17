@@ -27,18 +27,18 @@
            (GET "/" []
              (splash))
            (GET "/get-balance" [account-number]
-             (json-response (services/get-balance (read-string account-number))))
+             (json-response (services/get-balance account-number)))
            (GET "/get-statement" [account-number]
-             (json-response (services/get-statement (read-string account-number))))
+             (json-response (services/get-statement account-number)))
            (GET "/get-debt-periods" [account-number]
-             (json-response (services/get-debt-periods (read-string account-number))))
+             (json-response (services/get-debt-periods account-number)))
            (PUT "/create-account" [name]
              (json-response (services/create-account name)))
            (PUT "/operate" [party
                             counter-party
                             amount
                             offset]
-             (json-response (services/operate (read-string party)
+             (json-response (services/operate party
                                               counter-party
                                               (BigDecimal. amount)
                                               offset))))
