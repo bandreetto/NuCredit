@@ -23,8 +23,23 @@
 (defn format-debt-dates [debts-vector]
   (map (comp format-end-date format-start-date) debts-vector))
 
-(defn get-debt-periods [account-id]
-  (format-debt-dates (ledger/get-debts account-id)))
+(defn get-debt-periods
+  ([account-id]
+   (let [debts (ledger/get-debts account-id)]
+     (try
+       (if (empty? debts)
+         {:error (str "The account " account-id " has no debts")}
+         (format-debt-dates debts))
+       (catch RuntimeException e
+         ; If exception occoured, try again.
+         ; Aparently there is a function inside LazySeq debts
+         ; that its not being evaluated, even if doall is called.
+         ; Running again will work because now it is evaluated.
+         (get-debt-periods account-id debts)))))
+  ([account-id debts]
+   (if (empty? debts)
+     {:error (str "The account " account-id " has no debts")}
+     (format-debt-dates debts))))
 
 ; Get Statement
 

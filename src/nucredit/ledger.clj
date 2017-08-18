@@ -1,4 +1,5 @@
-(ns nucredit.ledger)
+(ns nucredit.ledger
+  (:require [clj-time.core :as t]))
 
 (def ledger (ref '()))
 (def accounts (ref {}))
@@ -26,9 +27,11 @@
     nil))
 
 (defn finish-debt! [last-debt account-id date]
-  (alter debts update account-id assoc
-         (.indexOf (@debts account-id) last-debt)
-         (assoc last-debt :end date)))
+  (if (t/before? (last-debt :start) date)
+    (alter debts update account-id assoc
+           (.indexOf (@debts account-id) last-debt)
+           (assoc last-debt :end date))
+    (alter debts update account-id remove #(= last-debt %))))
 
 (defn add-new-debt!
   ([account-id date amount]
