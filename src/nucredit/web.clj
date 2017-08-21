@@ -40,7 +40,7 @@
                             offset]
              (json-response (services/operate party
                                               counter-party
-                                              (BigDecimal. amount)
+                                              (bigdec amount)
                                               offset))))
 
 (defn wrap-error-handling [handler]
