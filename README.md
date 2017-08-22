@@ -22,6 +22,7 @@ The default port that the application will be listening is **5000**, if you want
 > (def server (nucredit.web/-main <port>))
 ```
 
+If you dont want to run locally, the application is hosted on Heroku on ***https://nucredit.herokuapp.com***.
 
 ## Endpoints
 
