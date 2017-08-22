@@ -41,7 +41,7 @@ This endpoint receives a string and creates a new account with the ***name*** ar
  
  Example:
  ```
- curl -X GET -H "Content-Type: application/json" \
+ curl -X POST -H "Content-Type: application/json" \
  -d '{"name": "foo"}' \
  http://localhost:5000/create-account
  ```
@@ -64,7 +64,7 @@ If the operation was done correctly this should return a JSON containing the acc
 
 Example:
 ```
- curl -X PUT -H "Content-Type: application/json" \
+ curl -X POST -H "Content-Type: application/json" \
  -d '{"party": 1, "counter-party": "Uber", "amount": -100, "offset": 5}' \
  http://localhost:5000/operate
  ```
@@ -86,8 +86,7 @@ Example:
  Example:
  ```
  curl -X GET -H "Content-Type: application/json" \
-  -d '{"account-number": 1}' \
-  http://localhost:5000/get-balance
+  http://localhost:5000/get-balance/1
  ```
  
  Should return:
@@ -105,8 +104,7 @@ Example:
  Example:
  ```
   curl -X GET -H "Content-Type: application/json" \
-   -d '{"account-number": 1}' \
-   http://localhost:5000/get-statement
+   http://localhost:5000/get-statement/1
   ```
   
   Should Return:
@@ -135,8 +133,7 @@ Example:
 
 ```
   curl -X GET -H "Content-Type: application/json" \
-   -d '{"account-number": 1}' \
-   http://localhost:5000/get-debt-periods
+   http://localhost:5000/get-debt-periods/1
   ```
   
 Should return:
@@ -150,3 +147,6 @@ Should return:
 ]
 ```
  
+# Tests
+
+In order to run tests just run the ***run-tests.sh***. This will run both ledger and services unit test and the integrated tests too. Make sure port 5001 to 5005 are available in order to integrated tests to work.

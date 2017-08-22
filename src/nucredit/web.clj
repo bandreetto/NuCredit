@@ -26,15 +26,15 @@
 (defroutes handler
            (GET "/" []
              (splash))
-           (GET "/get-balance" [account-number]
-             (json-response (services/get-balance account-number)))
-           (GET "/get-statement" [account-number]
-             (json-response (services/get-statement account-number)))
-           (GET "/get-debt-periods" [account-number]
-             (json-response (services/get-debt-periods account-number)))
-           (PUT "/create-account" [name]
+           (GET "/get-balance/:account-number" [account-number]
+             (json-response (services/get-balance (read-string account-number))))
+           (GET "/get-statement/:account-number" [account-number]
+             (json-response (services/get-statement (read-string account-number))))
+           (GET "/get-debt-periods/:account-number" [account-number]
+             (json-response (services/get-debt-periods (read-string account-number))))
+           (POST "/create-account" [name]
              (json-response (services/create-account name)))
-           (PUT "/operate" [party
+           (POST "/operate" [party
                             counter-party
                             amount
                             offset]
