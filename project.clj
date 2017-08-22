@@ -10,7 +10,8 @@
    [compojure "1.6.0"]
    [cheshire "5.5.0"]
    [environ "1.1.0"]
-   [clj-time "0.14.0"]]
+   [clj-time "0.14.0"]
+   [clj-http "3.7.0"]]
   :dev-dependencies
   [[lein-run "1.0.0-SNAPSHOT"]]
   :min-lein-version "2.0.0"

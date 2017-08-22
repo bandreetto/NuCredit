@@ -1,4 +1,5 @@
-(ns nucredit.ledger)
+(ns nucredit.ledger
+  (:require [clj-time.core :as t]))
 
 (def ledger (ref '()))
 (def accounts (ref {}))
@@ -14,11 +15,13 @@
 
 (defn account-status-event? [curr, next]
   ; Check if next has become negative or if it returned from negative to positive.
-  (if (< next 0)
-    true
-    (if (< curr 0)
+  (if (= curr next)
+    false
+    (if (< next 0)
       true
-      false)))
+      (if (< curr 0)
+        true
+        false))))
 
 (defn get-last-open-debt [account-id]
   (if-let [debts (@debts account-id)]
@@ -26,9 +29,11 @@
     nil))
 
 (defn finish-debt! [last-debt account-id date]
-  (alter debts update account-id assoc
-         (.indexOf (@debts account-id) last-debt)
-         (assoc last-debt :end date)))
+  (if (t/before? (last-debt :start) date)
+    (alter debts update account-id assoc
+           (.indexOf (@debts account-id) last-debt)
+           (assoc last-debt :end date))
+    (alter debts update account-id remove #(= last-debt %))))
 
 (defn add-new-debt!
   ([account-id date amount]
@@ -37,9 +42,12 @@
                                         :end nil}))
   ([last-debt account-id date amount]
    (finish-debt! last-debt account-id date)
-   (alter debts update account-id conj {:principal (- amount)
-                                        :start date
-                                        :end nil})))
+   (try
+     (add-new-debt! account-id date amount)
+     (catch IllegalArgumentException e
+       ; Same problem as get-debt-periods.
+       ; Couldnt find a way to solve this yet.
+       (add-new-debt! account-id date amount)))))
 
 (defn consolidate [& {:keys [party counter-party amount date]}]
   (dosync
