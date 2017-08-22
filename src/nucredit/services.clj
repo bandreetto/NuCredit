@@ -5,6 +5,42 @@
             [clj-time.coerce :as c]
             [clojure.set :as set]))
 
+
+; Get Debt Periods
+
+(defn format-end-date [debt]
+  (if-let [end-date (debt :end)]
+    (update debt :end (comp
+                        #(f/unparse (f/formatters :year-month-day) %)
+                        #(c/to-date-time %)))
+    debt))
+
+(defn format-start-date [debt]
+  (update debt :start (comp
+                        #(f/unparse (f/formatters :year-month-day) %)
+                        #(c/to-date-time %))))
+
+(defn format-debt-dates [debts-vector]
+  (map (comp format-end-date format-start-date) debts-vector))
+
+(defn get-debt-periods
+  ([account-id]
+   (let [debts (ledger/get-debts account-id)]
+     (try
+       (if (empty? debts)
+         {:error (str "The account " account-id " has no debts")}
+         (format-debt-dates debts))
+       (catch RuntimeException e
+         ; If exception occoured, try again.
+         ; Aparently there is a function inside LazySeq debts
+         ; that its not being evaluated, even if doall is called.
+         ; Running again will work because now it is evaluated.
+         (get-debt-periods account-id debts)))))
+  ([account-id debts]
+   (if (empty? debts)
+     {:error (str "The account " account-id " has no debts")}
+     (format-debt-dates debts))))
+
 ; Get Statement
 
 (defn remove-date [operation]
@@ -54,11 +90,10 @@
 (defn operate [party counter-party amount offset]
   (if-let [account (ledger/get-account party)]
     ((ledger/consolidate :party party
-                        :counter-party counter-party
-                        :amount amount
-                        :date (t/plus
+                         :counter-party counter-party
+                         :amount amount
+                         :date (t/plus
                                 (t/today)
-                                (t/days (read-string (or offset
-                                                         "0"))))) party)
+                                (t/days (or offset 0)))) party)
     {:error (str "No accounts with id: " party " found")}))
 
